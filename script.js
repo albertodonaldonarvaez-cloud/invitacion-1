@@ -239,6 +239,42 @@ function initPetals() {
     for (let i = 0; i < 2; i++) setTimeout(create, i * 800);
 }
 
+/* === CELEBRATION CONFETTI === */
+(function initConfetti() {
+    const section = document.getElementById('celebration');
+    if (!section) return;
+
+    let fired = false;
+    const observer = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting && !fired) {
+            fired = true;
+            observer.disconnect();
+
+            const colors = ['#D4AF37', '#E8D48B', '#C9A84C', '#B8960C', '#FFD700'];
+            const shapes = ['●', '■', '✦', '★'];
+            const count = innerWidth < 600 ? 15 : 25;
+
+            for (let i = 0; i < count; i++) {
+                const el = document.createElement('span');
+                el.className = 'confetti';
+                el.textContent = shapes[i % shapes.length];
+                el.style.left = Math.random() * 100 + '%';
+                el.style.top = '10%';
+                el.style.fontSize = (Math.random() * 10 + 8) + 'px';
+                el.style.color = colors[i % colors.length];
+                el.style.setProperty('--fall-dur', (Math.random() * 2 + 2) + 's');
+                el.style.setProperty('--fall-delay', (i * 0.04) + 's');
+                el.style.setProperty('--spin', (Math.random() * 720 + 360) + 'deg');
+                el.style.setProperty('--drift', ((Math.random() - 0.5) * 150) + 'px');
+                section.appendChild(el);
+                el.addEventListener('animationend', () => el.remove(), { once: true });
+            }
+        }
+    }, { threshold: 0.4 });
+
+    observer.observe(section);
+})();
+
 /* === CALENDAR === */
 function initCalendarButton() {
     const btn = document.getElementById('btn-add-calendar');

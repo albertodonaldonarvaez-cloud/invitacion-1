@@ -2048,9 +2048,37 @@ body {
 .divider-diamond,
 .scroll-indicator,
 .envelope-hint,
+.confetti,
 .gallery-swipe-hint {
     user-select: none;
     -webkit-user-select: none;
+}
+
+/* === CONFETTI === */
+.confetti {
+    position: absolute;
+    pointer-events: none;
+    z-index: 10;
+    will-change: transform, opacity;
+    animation: confettiFall var(--fall-dur, 3s) ease-out forwards;
+    animation-delay: var(--fall-delay, 0s);
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0);
+        opacity: 0;
+    }
+
+    8% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+
+    100% {
+        transform: translateY(350px) rotate(var(--spin, 720deg)) translateX(var(--drift, 50px));
+        opacity: 0;
+    }
 }
 
 /* Scrollbar */
