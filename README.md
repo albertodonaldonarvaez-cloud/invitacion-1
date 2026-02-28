@@ -10,7 +10,7 @@ Invitación digital interactiva para la celebración de 50 años de matrimonio d
 - ⏳ Cuenta regresiva en tiempo real
 - 📍 Mapa de Google Maps integrado con ubicación exacta
 - 📱 100% responsive (móvil y escritorio)
-- 🎵 Música de fondo con control de audio
+- 🎵 "Te Quiero" de José Luis Perales con fade-in al abrir
 - 🌸 Partículas y pétalos animados
 
 ## 🚀 Ejecutar localmente
@@ -59,6 +59,7 @@ docker compose up -d
 ├── index.html      # Estructura principal
 ├── styles.css      # Estilos y animaciones
 ├── script.js       # Lógica interactiva
+├── te-quiero.mp3   # 🎵 Música de fondo (fade-in automático)
 ├── img/            # Fotografías de la pareja
 ├── Dockerfile      # Contenedor Docker (nginx:alpine)
 ├── nginx.conf      # Configuración nginx con gzip + caché

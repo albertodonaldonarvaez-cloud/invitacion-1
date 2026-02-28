@@ -34,6 +34,9 @@ function initEnvelope() {
         envelope.classList.add('opening');
         playClickSound();
 
+        // Start "Te Quiero" with fade-in
+        MusicPlayer.startMusic();
+
         setTimeout(() => {
             envelopeScreen.classList.add('opened');
 
@@ -473,73 +476,123 @@ function initCalendarButton() {
 }
 
 /* =============================================
-   MUSIC TOGGLE
+   MUSIC PLAYER – "Te Quiero" José Luis Perales
+   with fade-in on envelope open
    ============================================= */
-(function initMusic() {
+const MusicPlayer = (function initMusic() {
     const btn = document.getElementById('music-toggle');
     const iconOn = document.getElementById('music-icon-on');
     const iconOff = document.getElementById('music-icon-off');
     let isPlaying = false;
-    let audioCtx = null;
-    let melodyInterval = null;
+    let audio = null;
+    let fadeInterval = null;
+    const MAX_VOLUME = 0.7;
+    const FADE_DURATION = 3000; // 3 seconds fade-in
+    const FADE_STEPS = 60;
 
-    function createAmbientMelody() {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-        const notes = [
-            523.25, 587.33, 659.25, 698.46, 783.99,
-            880.00, 783.99, 698.46, 659.25, 587.33,
-            523.25, 493.88, 440.00, 493.88, 523.25,
-            659.25, 783.99, 659.25, 523.25, 587.33
-        ];
-
-        let noteIndex = 0;
-
-        function playNote() {
-            if (!isPlaying || !audioCtx) return;
-
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            const filter = audioCtx.createBiquadFilter();
-
-            osc.connect(filter);
-            filter.connect(gain);
-            gain.connect(audioCtx.destination);
-
-            osc.type = 'sine';
-            osc.frequency.value = notes[noteIndex % notes.length];
-            filter.type = 'lowpass';
-            filter.frequency.value = 2000;
-
-            gain.gain.setValueAtTime(0, audioCtx.currentTime);
-            gain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 0.1);
-            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 2);
-
-            osc.start(audioCtx.currentTime);
-            osc.stop(audioCtx.currentTime + 2);
-            noteIndex++;
-        }
-
-        playNote();
-        melodyInterval = setInterval(playNote, 1800);
+    function createAudio() {
+        if (audio) return audio;
+        audio = new Audio('te-quiero.mp3');
+        audio.loop = true;
+        audio.volume = 0;
+        audio.preload = 'auto';
+        return audio;
     }
 
+    function fadeIn() {
+        if (fadeInterval) clearInterval(fadeInterval);
+        const stepTime = FADE_DURATION / FADE_STEPS;
+        const volumeStep = MAX_VOLUME / FADE_STEPS;
+        let currentStep = 0;
+
+        // Start from 0 volume
+        audio.volume = 0;
+
+        fadeInterval = setInterval(() => {
+            currentStep++;
+            // Use easeInQuad for a smooth, natural volume rise
+            const progress = currentStep / FADE_STEPS;
+            const easedProgress = progress * progress; // quadratic ease-in
+            audio.volume = Math.min(MAX_VOLUME, easedProgress * MAX_VOLUME);
+
+            if (currentStep >= FADE_STEPS) {
+                clearInterval(fadeInterval);
+                fadeInterval = null;
+                audio.volume = MAX_VOLUME;
+            }
+        }, stepTime);
+    }
+
+    function fadeOut(callback) {
+        if (fadeInterval) clearInterval(fadeInterval);
+        const stepTime = 800 / FADE_STEPS; // faster fade-out (0.8s)
+        const startVolume = audio.volume;
+        let currentStep = 0;
+
+        fadeInterval = setInterval(() => {
+            currentStep++;
+            const progress = currentStep / FADE_STEPS;
+            audio.volume = Math.max(0, startVolume * (1 - progress));
+
+            if (currentStep >= FADE_STEPS) {
+                clearInterval(fadeInterval);
+                fadeInterval = null;
+                audio.volume = 0;
+                if (callback) callback();
+            }
+        }, stepTime);
+    }
+
+    // Start music (called when envelope opens)
+    function startMusic() {
+        createAudio();
+        isPlaying = true;
+        btn.classList.add('playing');
+        iconOn.style.display = 'block';
+        iconOff.style.display = 'none';
+
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                fadeIn();
+            }).catch(() => {
+                // Autoplay blocked — will start on first user interaction
+                isPlaying = false;
+                btn.classList.remove('playing');
+                iconOn.style.display = 'block';
+                iconOff.style.display = 'none';
+            });
+        }
+    }
+
+    // Toggle button
     btn.addEventListener('click', () => {
-        isPlaying = !isPlaying;
+        createAudio();
 
         if (isPlaying) {
-            btn.classList.add('playing');
-            iconOn.style.display = 'block';
-            iconOff.style.display = 'none';
-            createAmbientMelody();
-        } else {
+            // Pause with fade-out
+            fadeOut(() => {
+                audio.pause();
+            });
+            isPlaying = false;
             btn.classList.remove('playing');
             iconOn.style.display = 'none';
             iconOff.style.display = 'block';
-            if (melodyInterval) clearInterval(melodyInterval);
-            if (audioCtx) { audioCtx.close(); audioCtx = null; }
+        } else {
+            // Resume/play with fade-in
+            isPlaying = true;
+            btn.classList.add('playing');
+            iconOn.style.display = 'block';
+            iconOff.style.display = 'none';
+
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => fadeIn()).catch(() => { });
+            }
         }
     });
+
+    return { startMusic };
 })();
 
 /* =============================================
