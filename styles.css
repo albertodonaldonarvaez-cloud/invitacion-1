@@ -2141,27 +2141,35 @@ img {
 }
 
 /* =============================================
-   PRINT STYLES
+   PRINT STYLES — TAMAÑO CARTA (8.5 x 11 in)
    ============================================= */
+@page {
+    size: letter portrait;
+    margin: 0.5in 0.6in;
+}
+
 @media print {
 
-    /* Reset all fixed/interactive elements */
+    /* ---- Global Reset ---- */
     *,
     *::before,
     *::after {
         animation: none !important;
         transition: none !important;
+        box-shadow: none !important;
     }
 
     body {
         overflow: visible !important;
         background: white !important;
         color: #1a1510 !important;
+        font-size: 11pt !important;
+        line-height: 1.4 !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
     }
 
-    /* Hide non-printable elements */
+    /* ---- Hide interactive / non-printable ---- */
     #envelope-screen,
     #particles-canvas,
     .music-btn,
@@ -2186,7 +2194,7 @@ img {
         display: none !important;
     }
 
-    /* Force visibility for all reveal elements */
+    /* ---- Force visibility ---- */
     .reveal,
     [class*="reveal-delay"],
     .invitation-hidden,
@@ -2195,39 +2203,37 @@ img {
         opacity: 1 !important;
         transform: none !important;
         visibility: visible !important;
+    }
+
+    #invitation {
         display: block !important;
     }
 
-    /* Sections layout */
+    /* ---- Sections base ---- */
     .section {
         min-height: auto !important;
-        page-break-inside: avoid;
         overflow: visible !important;
-        padding: 30px 0;
+        padding: 0 !important;
+        display: block !important;
     }
 
     .section-inner {
         max-width: 100% !important;
-        padding: 20px 40px !important;
+        padding: 18px 0 !important;
+        text-align: center;
     }
 
-    /* Hero - print friendly */
+    /* ===========================
+       PAGE 1 — HERO (portada)
+       =========================== */
     .hero-section {
-        background: linear-gradient(135deg, #1a1510, #2a1f14) !important;
+        background: linear-gradient(160deg, #1a1510 0%, #2a1f14 50%, #1a1510 100%) !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
-        padding: 50px 0 !important;
+        padding: 80px 40px 60px !important;
         page-break-after: always;
-    }
-
-    .hero-names {
-        font-size: 42px !important;
-        color: white !important;
-    }
-
-    .hero-intro,
-    .hero-psalm {
-        color: rgba(255, 255, 255, 0.85) !important;
+        border: 3px double #D4AF37;
+        border-radius: 4px;
     }
 
     .hero-content {
@@ -2235,31 +2241,146 @@ img {
         opacity: 1 !important;
     }
 
-    /* Celebration section */
+    .hero-intro {
+        color: rgba(255, 255, 255, 0.8) !important;
+        font-size: 11pt !important;
+        letter-spacing: 3px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .hero-names {
+        font-size: 48pt !important;
+        color: white !important;
+        line-height: 1.2 !important;
+        margin-bottom: 16px !important;
+    }
+
+    .hero-names .ampersand {
+        color: #D4AF37 !important;
+        font-size: 32pt !important;
+    }
+
+    .golden-divider {
+        display: flex !important;
+        opacity: 1 !important;
+        margin: 16px auto !important;
+    }
+
+    .divider-diamond {
+        color: #D4AF37 !important;
+        opacity: 1 !important;
+    }
+
+    .divider-line {
+        background: #D4AF37 !important;
+        opacity: 0.6 !important;
+    }
+
+    .hero-psalm {
+        color: rgba(255, 255, 255, 0.75) !important;
+        font-size: 10.5pt !important;
+        font-style: italic !important;
+        line-height: 1.6 !important;
+        margin-top: 20px !important;
+    }
+
+    .hero-psalm em {
+        color: #D4AF37 !important;
+        font-weight: 600 !important;
+    }
+
+    .ornament-svg {
+        opacity: 0.5 !important;
+    }
+
+    .ornament-top,
+    .ornament-bottom {
+        display: block !important;
+        opacity: 1 !important;
+    }
+
+    /* ===========================
+       PAGE 2 — CELEBRATION + PHOTO
+       =========================== */
     .celebration-section {
         background: #faf8f5 !important;
+        padding: 30px 20px 20px !important;
         page-break-after: always;
     }
 
-    .celebration-img,
+    .celebration-photo-frame {
+        display: block !important;
+    }
+
     .photo-frame-border {
-        max-width: 350px !important;
-        margin: 0 auto !important;
+        max-width: 320px !important;
+        margin: 0 auto 16px !important;
+        border: 3px solid #D4AF37 !important;
+        border-radius: 8px !important;
+        overflow: hidden;
+    }
+
+    .celebration-img {
+        width: 100% !important;
+        display: block !important;
+    }
+
+    .photo-frame-caption {
+        font-style: italic;
+        color: #8B7532 !important;
+        margin: 8px 0 16px !important;
+        font-size: 10pt !important;
     }
 
     .celebration-badge {
         display: flex !important;
         flex-direction: column;
         align-items: center;
+        margin: 12px 0 !important;
+    }
+
+    .badge-ring {
+        width: 60px !important;
+        height: 60px !important;
+        border: 2px solid #D4AF37 !important;
+    }
+
+    .badge-number {
+        font-size: 24pt !important;
+        color: #D4AF37 !important;
+    }
+
+    .badge-text {
+        color: #8B7532 !important;
+        font-size: 9pt !important;
+        letter-spacing: 3px !important;
     }
 
     .section-title {
         color: #1a1510 !important;
+        font-size: 22pt !important;
+        margin-bottom: 10px !important;
     }
 
-    /* Gallery - show all photos in grid */
+    .celebration-text {
+        color: #444 !important;
+        font-size: 11pt !important;
+        line-height: 1.6 !important;
+    }
+
+    /* ===========================
+       PAGE 3 — GALLERY (all photos)
+       =========================== */
+    .gallery-section {
+        background: white !important;
+        page-break-before: always;
+        page-break-after: always;
+        padding: 20px 0 !important;
+    }
+
     .gallery-fullwidth {
         overflow: visible !important;
+        max-width: 100% !important;
     }
 
     #gallery-carousel {
@@ -2270,42 +2391,66 @@ img {
         display: flex !important;
         flex-wrap: wrap !important;
         transform: none !important;
-        gap: 10px;
+        gap: 12px;
         justify-content: center;
+        padding: 10px 0;
     }
 
     .gallery-slide {
         min-width: auto !important;
-        width: 45% !important;
+        width: 46% !important;
         flex-shrink: 0;
     }
 
     .gallery-slide img {
-        border-radius: 8px;
+        border-radius: 6px;
+        border: 2px solid #D4AF37;
+        width: 100%;
+        height: auto;
     }
 
-    .gallery-section {
-        background: white !important;
-        page-break-before: always;
-    }
-
-    /* Itinerary */
+    /* ===========================
+       PAGE 4 — ITINERARY + LOCATION + FOOTER
+       =========================== */
     .itinerary-section {
         background: #faf8f5 !important;
         color: #1a1510 !important;
+        padding: 20px 0 !important;
+        page-break-inside: avoid;
+    }
+
+    .timeline {
+        max-width: 100% !important;
     }
 
     .timeline::before {
-        background: #D4AF37 !important;
+        background: linear-gradient(180deg, transparent, #D4AF37, #D4AF37, transparent) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .timeline-item {
+        padding: 10px 0 !important;
+    }
+
+    .timeline-dot {
+        border-color: #D4AF37 !important;
+        background: white !important;
+        color: #D4AF37 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
     }
 
     .timeline-content {
-        background: rgba(212, 175, 55, 0.08) !important;
-        border-color: #D4AF37 !important;
+        background: rgba(212, 175, 55, 0.06) !important;
+        border: 1px solid rgba(212, 175, 55, 0.3) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
     }
 
     .timeline-time {
         color: #8B7532 !important;
+        font-size: 14pt !important;
     }
 
     .timeline-title {
@@ -2313,32 +2458,58 @@ img {
     }
 
     .timeline-desc {
-        color: #555 !important;
+        color: #666 !important;
     }
 
     /* Location */
     .location-section {
         background: white !important;
+        padding: 20px 0 !important;
+        page-break-inside: avoid;
     }
 
     .location-card {
         box-shadow: none !important;
         border: 2px solid #D4AF37 !important;
+        padding: 24px !important;
     }
 
-    /* Footer */
-    .footer-section {
-        min-height: auto !important;
-        background: linear-gradient(135deg, #1a1510, #2a1f14) !important;
+    .location-arch {
+        border-color: #D4AF37 !important;
+        color: #D4AF37 !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
-        padding: 40px 0 !important;
     }
 
-    .footer-photo-bg {
-        display: none !important;
+    .location-name {
+        color: #1a1510 !important;
+        font-size: 14pt !important;
     }
 
+    .location-address {
+        color: #666 !important;
+    }
+
+    .location-time {
+        color: #8B7532 !important;
+    }
+
+    .location-time svg {
+        color: #8B7532 !important;
+    }
+
+    /* Footer — elegant closing */
+    .footer-section {
+        min-height: auto !important;
+        background: linear-gradient(160deg, #1a1510, #2a1f14) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        padding: 30px 20px !important;
+        page-break-inside: avoid;
+        border-top: 2px solid #D4AF37;
+    }
+
+    .footer-photo-bg,
     .footer-gradient-overlay {
         display: none !important;
     }
@@ -2346,18 +2517,26 @@ img {
     .footer-names {
         color: white !important;
         text-shadow: none !important;
+        font-size: 28pt !important;
     }
 
     .footer-text {
-        color: rgba(255, 255, 255, 0.8) !important;
+        color: rgba(255, 255, 255, 0.75) !important;
         text-shadow: none !important;
+        font-size: 11pt !important;
     }
 
     .footer-date {
         color: #D4AF37 !important;
+        font-size: 10pt !important;
+        letter-spacing: 4px !important;
     }
 
-    /* Ornaments in print */
+    .footer-final-hearts .heart {
+        color: #D4AF37 !important;
+    }
+
+    /* ---- Ornaments ---- */
     .golden-divider,
     .ornament-svg,
     .divider-diamond {
@@ -2365,9 +2544,15 @@ img {
         opacity: 1 !important;
     }
 
-    /* Links as text */
+    /* ---- Links as text ---- */
     a {
         text-decoration: none !important;
         color: inherit !important;
+    }
+
+    /* ---- Images ---- */
+    img {
+        max-width: 100% !important;
+        height: auto !important;
     }
 }
