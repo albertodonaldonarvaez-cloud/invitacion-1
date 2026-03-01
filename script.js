@@ -289,7 +289,7 @@ function initCalendarButton() {
 }
 
 /* === PRINT BUTTON === */
-document.getElementById('print-btn').addEventListener('click', () => window.print());
+document.getElementById('print-btn').addEventListener('click', () => window.open('print.html', '_blank'));
 
 /* === MUSIC PLAYER — "Te Quiero" === */
 const MusicPlayer = (() => {

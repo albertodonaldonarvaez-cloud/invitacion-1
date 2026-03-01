@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación – José Renato & María Isabel – 50 Años</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: letter portrait;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 8.5in;
+            min-height: 11in;
+            margin: 0 auto;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            color: #1a1510;
+            background: #faf8f5;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* === HEADER / PORTADA === */
+        .header {
+            background: linear-gradient(160deg, #1a1510 0%, #2a1f14 40%, #1a1510 100%);
+            color: white;
+            text-align: center;
+            padding: 0.5in 0.6in 0.45in;
+            position: relative;
+            border-bottom: 3px solid #D4AF37;
+        }
+
+        .header::before,
+        .header::after {
+            content: '✦';
+            position: absolute;
+            color: #D4AF37;
+            font-size: 10px;
+            opacity: 0.5;
+        }
+
+        .header::before {
+            top: 16px;
+            left: 20px;
+        }
+
+        .header::after {
+            top: 16px;
+            right: 20px;
+        }
+
+        .ornament {
+            color: #D4AF37;
+            font-size: 14px;
+            letter-spacing: 8px;
+            margin-bottom: 8px;
+            opacity: 0.6;
+        }
+
+        .header-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 8pt;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.65);
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .names {
+            font-family: 'Great Vibes', cursive;
+            font-size: 42pt;
+            line-height: 1.15;
+            margin-bottom: 6px;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .ampersand {
+            display: block;
+            font-size: 24pt;
+            color: #D4AF37;
+            margin: -4px 0;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .divider-line {
+            width: 60px;
+            height: 1px;
+            background: #D4AF37;
+            opacity: 0.5;
+        }
+
+        .divider-diamond {
+            color: #D4AF37;
+            font-size: 7px;
+        }
+
+        .psalm-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 7pt;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #D4AF37;
+            margin-bottom: 4px;
+        }
+
+        .psalm {
+            font-style: italic;
+            font-size: 10pt;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+            max-width: 4.5in;
+            margin: 0 auto;
+        }
+
+        /* === BODY CONTENT === */
+        .content {
+            padding: 0.3in 0.6in;
+        }
+
+        /* === CELEBRATION ROW === */
+        .celebration {
+            display: flex;
+            align-items: center;
+            gap: 0.35in;
+            margin-bottom: 0.25in;
+        }
+
+        .photo-frame {
+            flex-shrink: 0;
+            width: 2.5in;
+            border: 3px solid #D4AF37;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .celebration-info {
+            flex: 1;
+            text-align: center;
+        }
+
+        .badge {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #D4AF37;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+        }
+
+        .badge-number {
+            font-family: 'Great Vibes', cursive;
+            font-size: 26pt;
+            color: #D4AF37;
+        }
+
+        .badge-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 7pt;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #8B7532;
+            margin-bottom: 10px;
+        }
+
+        .celebration-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 20pt;
+            color: #1a1510;
+            margin-bottom: 8px;
+        }
+
+        .celebration-text {
+            font-size: 10pt;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* === SECTION DIVIDER === */
+        .section-divider {
+            text-align: center;
+            margin: 0.18in 0;
+        }
+
+        .section-divider .line {
+            display: inline-block;
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+        }
+
+        /* === PHOTO GALLERY ROW === */
+        .gallery-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 0.2in;
+        }
+
+        .gallery-photo {
+            flex: 1;
+            border: 2px solid #D4AF37;
+            border-radius: 6px;
+            overflow: hidden;
+            max-height: 1.6in;
+        }
+
+        .gallery-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-caption {
+            text-align: center;
+            font-family: 'Great Vibes', cursive;
+            font-size: 11pt;
+            color: #8B7532;
+            margin-bottom: 0.15in;
+        }
+
+        /* === BOTTOM SECTION: ITINERARY + LOCATION === */
+        .bottom-row {
+            display: flex;
+            gap: 0.3in;
+            margin-bottom: 0.2in;
+        }
+
+        .bottom-col {
+            flex: 1;
+        }
+
+        .col-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 8pt;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #D4AF37;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        /* Itinerary */
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding-left: 8px;
+            border-left: 2px solid #D4AF37;
+        }
+
+        .timeline-time {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 9pt;
+            font-weight: 600;
+            color: #8B7532;
+            white-space: nowrap;
+            min-width: 55px;
+        }
+
+        .timeline-label {
+            font-size: 9.5pt;
+            color: #333;
+        }
+
+        .timeline-desc {
+            font-size: 8pt;
+            color: #888;
+            margin-top: 1px;
+        }
+
+        /* Location */
+        .location-card {
+            border: 2px solid #D4AF37;
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            background: white;
+        }
+
+        .location-icon {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        .location-name {
+            font-size: 12pt;
+            font-weight: 600;
+            color: #1a1510;
+            margin-bottom: 4px;
+        }
+
+        .location-address {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 8pt;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .location-time {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 8.5pt;
+            color: #8B7532;
+            font-weight: 500;
+        }
+
+        .location-date {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 9pt;
+            color: #D4AF37;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-top: 8px;
+        }
+
+        /* === FOOTER === */
+        .footer {
+            background: linear-gradient(160deg, #1a1510, #2a1f14);
+            color: white;
+            text-align: center;
+            padding: 0.25in 0.5in;
+            border-top: 2px solid #D4AF37;
+        }
+
+        .footer-text {
+            font-style: italic;
+            font-size: 10pt;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 4px;
+        }
+
+        .footer-names {
+            font-family: 'Great Vibes', cursive;
+            font-size: 22pt;
+            margin-bottom: 4px;
+        }
+
+        .footer-date {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 7pt;
+            letter-spacing: 4px;
+            color: #D4AF37;
+        }
+
+        .footer-hearts {
+            margin-top: 6px;
+            color: #D4AF37;
+            font-size: 10px;
+            letter-spacing: 6px;
+        }
+
+        /* === PRINT-ONLY BUTTON === */
+        .print-action {
+            text-align: center;
+            padding: 16px;
+            background: #faf8f5;
+        }
+
+        .print-action button {
+            font-family: 'Montserrat', sans-serif;
+            padding: 10px 32px;
+            background: #D4AF37;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .print-action button:hover {
+            background: #8B7532;
+        }
+
+        .back-link {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            color: #8B7532;
+            margin-left: 16px;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        @media print {
+            .print-action {
+                display: none !important;
+            }
+
+            body {
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Print controls (hidden when printing) -->
+    <div class="print-action">
+        <button onclick="window.print()">🖨️ Imprimir Invitación</button>
+        <a href="index.html" class="back-link">← Volver a la invitación digital</a>
+    </div>
+
+    <!-- === HEADER === -->
+    <div class="header">
+        <div class="ornament">◆ ◇ ◆ ◇ ◆</div>
+        <p class="header-subtitle">Con la bendición de Dios, celebramos</p>
+        <h1 class="names">
+            José Renato
+            <span class="ampersand">&</span>
+            María Isabel
+        </h1>
+        <div class="divider">
+            <span class="divider-line"></span>
+            <span class="divider-diamond">◆</span>
+            <span class="divider-line"></span>
+        </div>
+        <p class="psalm-label">Salmo 126:3</p>
+        <p class="psalm">
+            "Grandes cosas ha hecho el Señor con nosotros,<br>
+            y estamos llenos de alegría"
+        </p>
+    </div>
+
+    <!-- === CONTENT === -->
+    <div class="content">
+
+        <!-- Celebration + Photo -->
+        <div class="celebration">
+            <div class="photo-frame">
+                <img src="img/foto2.jpg" alt="José Renato y María Isabel">
+            </div>
+            <div class="celebration-info">
+                <div class="badge">
+                    <span class="badge-number">50</span>
+                </div>
+                <p class="badge-label">Años de Amor</p>
+                <h2 class="celebration-title">¡Celebramos 50 años juntos!</h2>
+                <p class="celebration-text">
+                    Medio siglo de amor, de risas,<br>
+                    de caminos recorridos de la mano.<br>
+                    Les invitamos a compartir con nosotros<br>
+                    este momento tan especial.
+                </p>
+            </div>
+        </div>
+
+        <div class="section-divider"><span class="line"></span></div>
+
+        <!-- Photo Gallery -->
+        <p class="gallery-caption">Nuestra Historia</p>
+        <div class="gallery-row">
+            <div class="gallery-photo">
+                <img src="img/foto1.jpg" alt="Foto 1">
+            </div>
+            <div class="gallery-photo">
+                <img src="img/foto2.jpg" alt="Foto 2">
+            </div>
+            <div class="gallery-photo">
+                <img src="img/foto3.jpg" alt="Foto 3">
+            </div>
+        </div>
+
+        <div class="section-divider"><span class="line"></span></div>
+
+        <!-- Itinerary + Location -->
+        <div class="bottom-row">
+            <div class="bottom-col">
+                <h3 class="col-title">✦ Itinerario</h3>
+                <div class="timeline-item">
+                    <span class="timeline-time">7:00 PM</span>
+                    <div>
+                        <div class="timeline-label">Recepción</div>
+                        <div class="timeline-desc">Llegada al Salón de Eventos</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-time">8:30 PM</span>
+                    <div>
+                        <div class="timeline-label">Cena</div>
+                        <div class="timeline-desc">Disfrutemos juntos una deliciosa cena</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-time">9:30 PM</span>
+                    <div>
+                        <div class="timeline-label">Baile y Celebración</div>
+                        <div class="timeline-desc">¡A bailar y festejar!</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-col">
+                <h3 class="col-title">✦ Ubicación</h3>
+                <div class="location-card">
+                    <div class="location-icon">📍</div>
+                    <h4 class="location-name">Salón de Eventos<br>Sol y Luna</h4>
+                    <p class="location-address">Av. 20 de Noviembre, INFONAVIT,<br>31690 La Junta, Chih.</p>
+                    <p class="location-time">🕖 7:00 PM – Recepción</p>
+                    <p class="location-date">Sábado, 11 de Abril 2026</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === FOOTER === -->
+    <div class="footer">
+        <p class="footer-text">Con cariño,</p>
+        <h2 class="footer-names">José Renato & María Isabel</h2>
+        <p class="footer-date">11 · ABRIL · 2026</p>
+        <p class="footer-hearts">♥ ♥ ♥</p>
+    </div>
+
+</body>
+
+</html>
