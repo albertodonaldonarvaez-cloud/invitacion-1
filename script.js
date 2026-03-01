@@ -19,6 +19,7 @@ function initEnvelope() {
     const invitation = document.getElementById('invitation');
     const navMenu = document.getElementById('nav-menu');
     const musicBtn = document.getElementById('music-toggle');
+    const printBtn = document.getElementById('print-btn');
     let opened = false;
 
     function openEnvelope() {
@@ -40,6 +41,7 @@ function initEnvelope() {
                 navMenu.classList.remove('nav-hidden');
                 navMenu.classList.add('nav-visible');
                 musicBtn.classList.add('active');
+                printBtn.classList.add('active');
 
                 setTimeout(() => {
                     envelopeScreen.style.display = 'none';
@@ -285,6 +287,9 @@ function initCalendarButton() {
         window.open(url, '_blank');
     });
 }
+
+/* === PRINT BUTTON === */
+document.getElementById('print-btn').addEventListener('click', () => window.print());
 
 /* === MUSIC PLAYER — "Te Quiero" === */
 const MusicPlayer = (() => {

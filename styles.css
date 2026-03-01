@@ -139,6 +139,45 @@ body {
     }
 }
 
+/* === PRINT BUTTON === */
+.print-btn {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 1000;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(212, 175, 55, 0.4);
+    background: rgba(26, 21, 16, 0.7);
+    backdrop-filter: blur(10px);
+    color: var(--gold);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.print-btn.active {
+    opacity: 0.6;
+    pointer-events: all;
+}
+
+.print-btn:hover {
+    opacity: 1;
+    background: var(--gold);
+    color: var(--bg-dark);
+    transform: scale(1.1);
+}
+
+.print-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
 /* =============================================
    ENVELOPE SCREEN
    ============================================= */
@@ -2099,4 +2138,236 @@ body {
 img {
     max-width: 100%;
     height: auto;
+}
+
+/* =============================================
+   PRINT STYLES
+   ============================================= */
+@media print {
+
+    /* Reset all fixed/interactive elements */
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    body {
+        overflow: visible !important;
+        background: white !important;
+        color: #1a1510 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Hide non-printable elements */
+    #envelope-screen,
+    #particles-canvas,
+    .music-btn,
+    .print-btn,
+    .nav-toggle,
+    .nav-drawer,
+    .nav-overlay,
+    #nav-menu,
+    .floating-petals,
+    .scroll-indicator,
+    .btn-calendar,
+    .btn-location,
+    .map-container,
+    .gallery-btn,
+    .gallery-dots,
+    .gallery-swipe-hint,
+    .confetti,
+    .music-ripple,
+    .countdown-section,
+    .gift-section,
+    .petal {
+        display: none !important;
+    }
+
+    /* Force visibility for all reveal elements */
+    .reveal,
+    [class*="reveal-delay"],
+    .invitation-hidden,
+    .invitation-visible,
+    #invitation {
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
+        display: block !important;
+    }
+
+    /* Sections layout */
+    .section {
+        min-height: auto !important;
+        page-break-inside: avoid;
+        overflow: visible !important;
+        padding: 30px 0;
+    }
+
+    .section-inner {
+        max-width: 100% !important;
+        padding: 20px 40px !important;
+    }
+
+    /* Hero - print friendly */
+    .hero-section {
+        background: linear-gradient(135deg, #1a1510, #2a1f14) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        padding: 50px 0 !important;
+        page-break-after: always;
+    }
+
+    .hero-names {
+        font-size: 42px !important;
+        color: white !important;
+    }
+
+    .hero-intro,
+    .hero-psalm {
+        color: rgba(255, 255, 255, 0.85) !important;
+    }
+
+    .hero-content {
+        transform: none !important;
+        opacity: 1 !important;
+    }
+
+    /* Celebration section */
+    .celebration-section {
+        background: #faf8f5 !important;
+        page-break-after: always;
+    }
+
+    .celebration-img,
+    .photo-frame-border {
+        max-width: 350px !important;
+        margin: 0 auto !important;
+    }
+
+    .celebration-badge {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .section-title {
+        color: #1a1510 !important;
+    }
+
+    /* Gallery - show all photos in grid */
+    .gallery-fullwidth {
+        overflow: visible !important;
+    }
+
+    #gallery-carousel {
+        overflow: visible !important;
+    }
+
+    #gallery-track {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        transform: none !important;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .gallery-slide {
+        min-width: auto !important;
+        width: 45% !important;
+        flex-shrink: 0;
+    }
+
+    .gallery-slide img {
+        border-radius: 8px;
+    }
+
+    .gallery-section {
+        background: white !important;
+        page-break-before: always;
+    }
+
+    /* Itinerary */
+    .itinerary-section {
+        background: #faf8f5 !important;
+        color: #1a1510 !important;
+    }
+
+    .timeline::before {
+        background: #D4AF37 !important;
+    }
+
+    .timeline-content {
+        background: rgba(212, 175, 55, 0.08) !important;
+        border-color: #D4AF37 !important;
+    }
+
+    .timeline-time {
+        color: #8B7532 !important;
+    }
+
+    .timeline-title {
+        color: #1a1510 !important;
+    }
+
+    .timeline-desc {
+        color: #555 !important;
+    }
+
+    /* Location */
+    .location-section {
+        background: white !important;
+    }
+
+    .location-card {
+        box-shadow: none !important;
+        border: 2px solid #D4AF37 !important;
+    }
+
+    /* Footer */
+    .footer-section {
+        min-height: auto !important;
+        background: linear-gradient(135deg, #1a1510, #2a1f14) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        padding: 40px 0 !important;
+    }
+
+    .footer-photo-bg {
+        display: none !important;
+    }
+
+    .footer-gradient-overlay {
+        display: none !important;
+    }
+
+    .footer-names {
+        color: white !important;
+        text-shadow: none !important;
+    }
+
+    .footer-text {
+        color: rgba(255, 255, 255, 0.8) !important;
+        text-shadow: none !important;
+    }
+
+    .footer-date {
+        color: #D4AF37 !important;
+    }
+
+    /* Ornaments in print */
+    .golden-divider,
+    .ornament-svg,
+    .divider-diamond {
+        display: block !important;
+        opacity: 1 !important;
+    }
+
+    /* Links as text */
+    a {
+        text-decoration: none !important;
+        color: inherit !important;
+    }
 }
