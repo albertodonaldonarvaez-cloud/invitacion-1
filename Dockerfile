@@ -9,6 +9,7 @@ COPY nginx.conf /etc/nginx/conf.d/
 
 # Copy project files
 COPY index.html /usr/share/nginx/html/
+COPY print.html /usr/share/nginx/html/
 COPY styles.css /usr/share/nginx/html/
 COPY script.js /usr/share/nginx/html/
 COPY te-quiero.mp3 /usr/share/nginx/html/
